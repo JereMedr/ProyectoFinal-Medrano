@@ -1,0 +1,136 @@
+main{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.catalogo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.catalogo-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 2%;
+    padding: 2%;
+}
+
+.card-cripto{
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f9fa;
+    border: 3px solid #1e73b8;
+    border-radius: 5px;
+    padding: 4%;
+    margin: 2%;
+    width: 18rem;
+    height: 500px;
+    justify-content: center;
+    align-items: center; 
+
+}
+
+.card-cripto:hover{
+    background-color: #1e73b8;
+    color: #f3f9fa;
+    border: 3px;
+    border-color: #f3f9fa;
+    
+}
+
+.card-cripto__img{
+    width: 300px;
+    height: 300px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.card-cripto__description{
+    text-align: center;
+    margin: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.card-cripto__button{
+    background-color: #1e73b8;
+    border: 1px solid #f3f9fa;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    }
+
+.card-cripto__redirectButton{
+    background-color: #1e73b8;
+    border: 1px solid #f3f9fa;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    }
+
+
+.card-cripto__button:hover{
+    background-color: #f3f9fa;
+
+    color: #1e73b8;
+    border: 3px;
+    border-color: #1e73b8;
+    }
+
+.carrito{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+
+.item-cart{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 1px solid #000a11;
+    margin: 5px;
+    padding: 5px;
+}
+
+.item-cart__info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    bottom: 2px solid #f0b019;
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.cart-cripto__img{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    padding: 10px;
+}
+

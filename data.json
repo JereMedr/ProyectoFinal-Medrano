@@ -1,0 +1,32 @@
+[
+    {
+    "name":"peso",
+    "description":"La Moneda Argentina actual campeona del mundo ***",
+    "price":1,
+    "cantidad":0
+    },
+    {
+    "name":"dolar",
+    "description":"Moneda emitida en Estados Unidos pais de Avengers",
+    "price":370,
+    "cantidad":0
+    },
+    {
+    "name":"euro",
+    "description":"Moneda extranjera emitida por de la Unión Europea",
+    "price":380,
+    "cantidad":0
+    },
+    {
+    "name":"bitcoin",
+    "description":"La moneda digital descentralizada de codigo abierto",
+    "price":7600000,
+    "cantidad":0
+    },
+    {
+    "name":"ethereum",
+    "description":"La Moneda digital creadora de contratos inteligentes",
+    "price":600000,
+    "cantidad":0
+    }
+]
