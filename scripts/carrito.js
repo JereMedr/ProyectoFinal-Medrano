@@ -17,7 +17,6 @@ dibujarEnDOM();
 
 function dibujarEnDOM(){
     dibujarCarritoDOM();
-    dibujarTotalDOM();
 }
 
 
