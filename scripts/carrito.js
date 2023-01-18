@@ -81,6 +81,7 @@ function llenarListaMonedas() {
         let monedaObject = JSON.parse(monedaString);
         monedas.push(monedaObject);
     }
+    actualizarDOM();
 }
 
 function comprarMoneda(moneda) {
