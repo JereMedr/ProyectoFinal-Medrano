@@ -8,12 +8,13 @@ class Moneda {
     }
 }
 const monedaCarrito = document.getElementById('productos-carrito');
+const totalCarrito = document.getElementById('total-carrito');
 let monedas = [];
-let carrito = [];
+let total = 0;
 loadMonedasFromJson();
 llenarListaMonedas();
 dibujarCarritoDOM();
-
+dibujarTotalDOM();
 function dibujarCarritoDOM(){
 monedas.map((moneda) => {
     monedaCarrito.innerHTML += `
@@ -34,6 +35,19 @@ monedas.map((moneda) => {
 </div>`
 });
 }
+
+function dibujarTotalDOM(){
+        totalCarrito.innerHTML += `
+        <div class="d-flex justify-content-center" >
+        <p>Total en pesos gastados :${total}</p>
+    </div>
+    <div class="d-flex justify-content-center">     
+    <a href="./advertencia.html">
+        <button class="card-cripto__button">Confirmar Compra</button>
+    </a>
+    </div>
+    `
+    }
 // lee el archivo data.json y los agrega a localStorage
 function loadMonedasFromJson(){
     const xhttp = new XMLHttpRequest();
@@ -66,6 +80,8 @@ function comprarMoneda(moneda){
             m.cantidad = m.cantidad + 1;
         }
     }
+    calcularTotal();
+    console.log(monedas);
     actualizarDOM();
 }
 
@@ -75,10 +91,25 @@ function quitarMoneda(moneda){
             m.cantidad = m.cantidad - 1;
         }
     }
+    calcularTotal();
+    console.log(monedas);
     actualizarDOM();
 }
 
 function actualizarDOM(){
     monedaCarrito.innerHTML = '';
     dibujarCarritoDOM();
+    totalCarrito.innerHTML = '';
+    dibujarTotalDOM();
+}
+
+//en funcion de la cantidad de monedas, calcula el total y lo muestra en el DOM
+function calcularTotal(){
+    parcial = 0;
+    auxiliar = 0;
+    for(m of monedas){
+        auxiliar = m.cantidad * m.price;
+        parcial = parcial + auxiliar;
+    }
+    total = parcial;
 }
