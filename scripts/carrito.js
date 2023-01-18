@@ -13,11 +13,7 @@ let monedas = [];
 let total = 0;
 loadMonedasFromJson();
 llenarListaMonedas();
-dibujarEnDOM();
-
-function dibujarEnDOM(){
-    dibujarCarritoDOM();
-}
+dibujarCarritoDOM();
 
 
 
