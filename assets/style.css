@@ -134,3 +134,10 @@ main{
     padding: 10px;
 }
 
+.cantidad{
+    margin: 10px;
+    padding: 10px;
+    padding-top: 3%;
+    width: 1%;
+    height: 100%;
+}

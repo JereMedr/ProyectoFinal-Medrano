@@ -7,19 +7,17 @@ class Moneda {
         this.cantidad = cantidad;
     }
 }
+const monedaCarrito = document.getElementById('productos-carrito');
 let monedas = [];
 let carrito = [];
 loadMonedasFromJson();
 llenarListaMonedas();
 dibujarCarritoDOM();
 
-
 function dibujarCarritoDOM(){
-    const monedaCarrito = document.getElementById('productos-carrito');
-console.log(monedaCarrito);
 monedas.map((moneda) => {
     monedaCarrito.innerHTML += `
-    <div class="item-cart"  id="peso">
+    <div class="item-cart"  id="${moneda.name}-id">
     <img src="./assets/img/${moneda.name}.png" class="cart-cripto__img" alt="${moneda.name}">
     <div>
         <h4>${moneda.name}</h4>
@@ -30,8 +28,8 @@ monedas.map((moneda) => {
         Valor en pesos: $${moneda.price}
     </p>
     </div>
-    <button class="btn btn-danger">Vender</button>
-    <p>${moneda.cantidad}</p>
+    <button class="btn btn-danger" onclick="quitarMoneda('${moneda.name}')">Vender</button>
+    <p class='cantidad' id="${moneda.name}-cantidad-id">${moneda.cantidad}</p>
     <button class="btn btn-success" onclick="comprarMoneda('${moneda.name}')">Comprar</button>
 </div>`
 });
@@ -52,6 +50,7 @@ xhttp.onreadystatechange = function() {
     }
 }
 }
+// lee el localStorage y los agrega a la lista de monedas
 function llenarListaMonedas(){
     for (let i = 0; i < localStorage.length; i++) {
         let monedaString = localStorage.getItem(localStorage.key(i));
@@ -60,35 +59,26 @@ function llenarListaMonedas(){
     }
     console.log(monedas);
 }
+
 function comprarMoneda(moneda){
-    if (moneda == 'dolar'){
-        addToCart('dolar');
-    } else if (moneda == 'euro'){
-        addToCart('euro');
-    } else if (moneda == 'peso'){
-        addToCart('peso');
-    } else if  (moneda == 'bitcoin'){
-        addToCart('bitcoin');
-    } else if (moneda == 'ethereum'){
-        addToCart('ethereum');
-    }
-}
-//suma en uno la cantidad de la moneda seleccionada y la agrega al localStorage
-function addToCart(moneda){
-    for(moneda of monedas){
-        if(moneda.name == moneda){
-            moneda.cantidad = moneda.cantidad + 1;
-            let monedaString = JSON.stringify(moneda);
-            localStorage.setItem(moneda.name, monedaString);
+    for(m of monedas){
+        if(m.name == moneda){
+            m.cantidad = m.cantidad + 1;
         }
     }
-
-    // let monedaString = localStorage.getItem(moneda);
-    // let monedaObject = JSON.parse(monedaString);
-    // monedaObject.cantidad = monedaObject.cantidad + 1;
-    // monedaString = JSON.stringify(monedaObject);
-    // localStorage.setItem(moneda, monedaString);
-    
+    actualizarDOM();
 }
 
+function quitarMoneda(moneda){
+    for(m of monedas){
+        if(m.name == moneda && m.cantidad > 0){
+            m.cantidad = m.cantidad - 1;
+        }
+    }
+    actualizarDOM();
+}
 
+function actualizarDOM(){
+    monedaCarrito.innerHTML = '';
+    dibujarCarritoDOM();
+}
