@@ -11,9 +11,8 @@ const monedaCarrito = document.getElementById('productos-carrito');
 const totalCarrito = document.getElementById('total-carrito');
 let monedas = [];
 let total = 0;
-loadMonedasFromJson();
 llenarListaMonedas();
-
+dibujarTotalDOM();
 
 function dibujarCarritoDOM() {
     monedas.map((moneda) => {
@@ -39,7 +38,7 @@ function dibujarCarritoDOM() {
 function dibujarTotalDOM() {
     totalCarrito.innerHTML += `
         <div class="d-flex justify-content-center" >
-        <p>Total en pesos gastados :${total}</p>
+        <p>Total en pesos gastados :${localStorage.getItem('total')}</p>
     </div>
     <div class="d-flex justify-content-center">     
     <a href="./advertencia.html">
@@ -48,49 +47,34 @@ function dibujarTotalDOM() {
     </div>
     `
 }
-
-// lee el archivo data.json y los agrega a localStorage
-function loadMonedasFromJson() {
-    fetch('data.json') // fetch es una promesa
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            for (let i = 0; i < data.length; i++) {
-                let moneda = new Moneda(data[i].name, data[i].description, data[i].price, data[i].cantidad);
-                let monedaString = JSON.stringify(moneda);
-                localStorage.setItem(data[i].name, monedaString);
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-
-}
 // lee el localStorage y los agrega a la lista de monedas
 function llenarListaMonedas() {
     for (let i = 0; i < localStorage.length; i++) {
-        let monedaString = localStorage.getItem(localStorage.key(i));
-        let monedaObject = JSON.parse(monedaString);
-        monedas.push(monedaObject);
+        if(localStorage.key(i) != 'total'){
+            let monedaString = localStorage.getItem(localStorage.key(i));
+            let monedaObject = JSON.parse(monedaString);
+            monedas.push(monedaObject);
+        }
     }
     dibujarCarritoDOM();
 }
-
+// agregar las compras al localStorage
 function comprarMoneda(moneda) {
     for (m of monedas) {
         if (m.name == moneda) {
             m.cantidad = m.cantidad + 1;
+            localStorage.setItem(m.name, JSON.stringify(m));
         }
     }
     calcularTotal();
     actualizarDOM();
 }
-
+// quitar las compras del localStorage
 function quitarMoneda(moneda) {
     for (m of monedas) {
         if (m.name == moneda && m.cantidad > 0) {
             m.cantidad = m.cantidad - 1;
+            localStorage.setItem(m.name, JSON.stringify(m));
         }
     }
     calcularTotal();
@@ -112,5 +96,6 @@ function calcularTotal() {
         auxiliar = m.cantidad * m.price;
         parcial = parcial + auxiliar;
     }
-    total = parcial;
+    localStorage.setItem('total', parcial);
+    total = localStorage.getItem('total');
 }
